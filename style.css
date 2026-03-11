@@ -1,8 +1,21 @@
 :root {
-  --neon-green: #39FF14;
-  --dark-bg: #000800;
-  --glow-bg: rgba(57, 255, 20, 0.1);
-  --terminal-font: 'Consolas', 'Courier New', monospace;
+  /* Dark Mode (Default) */
+  --neon: #39FF14;
+  --bg: #000800;
+  --panel: rgba(0, 10, 0, 0.95);
+  --glow: rgba(57, 255, 20, 0.1);
+  --text: #39FF14;
+  --border: #39FF14;
+}
+
+body.light-mode {
+  /* Light Mode (Stealth White) */
+  --neon: #006400;
+  --bg: #f0f5f0;
+  --panel: rgba(255, 255, 255, 0.95);
+  --glow: rgba(0, 100, 0, 0.05);
+  --text: #004400;
+  --border: #006400;
 }
 
 * {
@@ -12,42 +25,34 @@
 }
 
 body {
-  background-color: var(--dark-bg);
-  color: var(--neon-green);
-  font-family: var(--terminal-font);
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Consolas', 'Courier New', monospace;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  position: relative;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* CRT Effects */
+/* CRT & Noise Effects */
 .scanner-line {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: rgba(57, 255, 20, 0.2);
-  box-shadow: 0 0 10px var(--neon-green);
+  top: 0; left: 0; width: 100%; height: 2px;
+  background: var(--neon);
+  box-shadow: 0 0 10px var(--neon);
+  opacity: 0.2;
   z-index: 10;
   animation: scan 4s linear infinite;
   pointer-events: none;
 }
 
-@keyframes scan {
-  from { top: -10%; }
-  to { top: 110%; }
-}
+@keyframes scan { from { top: -10%; } to { top: 110%; } }
 
 .noise {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   background: url('https://grainy-gradients.vercel.app/noise.svg');
   opacity: 0.05;
   pointer-events: none;
@@ -59,36 +64,51 @@ body {
   width: 90%;
   max-width: 800px;
   height: 600px;
-  border: 1px solid var(--neon-green);
-  background: rgba(0, 10, 0, 0.95);
-  box-shadow: 0 0 30px rgba(0, 50, 0, 0.5);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: 0 0 30px var(--glow);
   display: flex;
   flex-direction: column;
   padding: 10px;
-  position: relative;
 }
 
 .terminal-header {
-  border-bottom: 1px solid var(--neon-green);
-  padding: 5px 15px;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 15px;
   display: flex;
   justify-content: space-between;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
+  align-items: center;
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .status-dot {
   width: 10px;
   height: 10px;
-  background: var(--neon-green);
+  background: var(--neon);
   border-radius: 50%;
-  display: inline-block;
   animation: pulse 1s infinite;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.mode-toggle {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.mode-toggle:hover {
+  background: var(--neon);
+  color: var(--bg);
 }
 
 /* Display Panel */
@@ -96,100 +116,63 @@ body {
   flex: 1;
   padding: 20px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
 }
 
 .output-stream {
   font-size: 0.8rem;
   opacity: 0.7;
-  height: 100px;
+  height: 80px;
   margin-bottom: 20px;
 }
 
-.system-msg {
-  margin-bottom: 5px;
-  animation: typing 0.5s ease-out;
-}
-
-@keyframes typing {
-  from { transform: translateX(-10px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
+.system-msg { margin-bottom: 4px; animation: typing 0.5s ease-out; }
+@keyframes typing { from { transform: translateX(-10px); opacity: 0; } }
 
 /* Result Grid */
-.result-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+.result-grid { display: flex; flex-direction: column; gap: 15px; }
 
 .lotto-row {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 10px;
-  border-bottom: 1px dashed rgba(57, 255, 20, 0.2);
+  border-bottom: 1px dashed var(--glow);
   padding-bottom: 10px;
   animation: slideRow 0.5s forwards;
-  opacity: 0;
 }
 
-@keyframes slideRow {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
+@keyframes slideRow { from { transform: translateY(10px); opacity: 0; } }
 
 .lotto-num {
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
-  border: 1px solid rgba(57, 255, 20, 0.5);
-  padding: 5px;
-  background: var(--glow-bg);
-  text-shadow: 0 0 5px var(--neon-green);
+  border: 1px solid var(--border);
+  background: var(--glow);
 }
 
 /* Footer Controls */
-.terminal-footer {
-  padding: 20px;
-  border-top: 1px solid var(--neon-green);
-}
+.terminal-footer { padding: 20px; border-top: 1px solid var(--border); }
 
-.progress-container {
-  width: 100%;
-  height: 5px;
-  background: rgba(57, 255, 20, 0.1);
-  margin-bottom: 20px;
-}
-
-.progress-bar {
-  width: 0%;
-  height: 100%;
-  background: var(--neon-green);
-  box-shadow: 0 0 10px var(--neon-green);
-  transition: width 0.1s linear;
-}
+.progress-container { width: 100%; height: 4px; background: var(--glow); margin-bottom: 15px; }
+.progress-bar { width: 0%; height: 100%; background: var(--neon); box-shadow: 0 0 5px var(--neon); }
 
 .glitch-btn {
   width: 100%;
   background: transparent;
-  color: var(--neon-green);
-  border: 1px solid var(--neon-green);
-  padding: 15px;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 12px;
   font-family: inherit;
   font-weight: bold;
   cursor: pointer;
-  letter-spacing: 3px;
-  transition: all 0.2s;
+  letter-spacing: 2px;
+  transition: 0.2s;
 }
 
-.glitch-btn:hover {
-  background: var(--neon-green);
-  color: var(--dark-bg);
-  box-shadow: 0 0 20px var(--neon-green);
+.glitch-btn:hover:not(:disabled) {
+  background: var(--neon);
+  color: var(--bg);
+  box-shadow: 0 0 20px var(--neon);
 }
 
-.glitch-btn:disabled {
-  opacity: 0.5;
-  cursor: wait;
-}
+.glitch-btn:disabled { opacity: 0.5; }

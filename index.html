@@ -6,21 +6,26 @@
     <title>X-LOTTO NEURAL ANALYZER</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dark-mode">
     <div class="scanner-line"></div>
     <div class="noise"></div>
     
     <main class="terminal">
         <header class="terminal-header">
-            <div class="status-dot"></div>
-            <span class="system-title">SYSTEM: NEURAL_LOTTO_v3.0.4</span>
-            <span class="system-time" id="clock">00:00:00</span>
+            <div class="header-left">
+                <div class="status-dot"></div>
+                <span class="system-title">SYSTEM: NEURAL_LOTTO_v3.1.0</span>
+            </div>
+            <div class="header-right">
+                <button id="mode-toggle" class="mode-toggle">TOGGLE_MODE</button>
+                <span class="system-time" id="clock">00:00:00</span>
+            </div>
         </header>
 
         <section class="display-panel">
             <div id="output-stream" class="output-stream">
                 <div class="system-msg">> SYSTEM INITIALIZED...</div>
-                <div class="system-msg">> WAITING FOR SEED INPUT...</div>
+                <div class="system-msg">> DARK_MODE ENABLED...</div>
             </div>
             
             <div id="result-grid" class="result-grid">
