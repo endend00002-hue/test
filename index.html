@@ -3,12 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
+  <title>CYBER-LOTTO GENERATOR</title>
   <link href='/style.css' rel='stylesheet'>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
+  <div class="background-grid"></div>
+  <div class="container">
+    <header>
+      <h1 class="glitch" data-text="NEURAL LOTTO">NEURAL LOTTO</h1>
+      <p class="subtitle">QUANTUM PROBABILITY ANALYZER v2.0</p>
+    </header>
+    
+    <div id="result-display" class="result-display">
+      <!-- Generated numbers will appear here -->
+      <div class="placeholder-text">WAITING FOR UPLINK...</div>
+    </div>
+
+    <div class="controls">
+      <button id="generate-btn" class="sf-button">INITIATE SEQUENCE</button>
+    </div>
+  </div>
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>
