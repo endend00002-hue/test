@@ -1,28 +1,41 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CYBER-LOTTO GENERATOR</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-LOTTO NEURAL ANALYZER</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="background-grid"></div>
-  <div class="container">
-    <header>
-      <h1 class="glitch" data-text="NEURAL LOTTO">NEURAL LOTTO</h1>
-      <p class="subtitle">QUANTUM PROBABILITY ANALYZER v2.0</p>
-    </header>
+    <div class="scanner-line"></div>
+    <div class="noise"></div>
     
-    <div id="result-display" class="result-display">
-      <!-- Generated numbers will appear here -->
-      <div class="placeholder-text">WAITING FOR UPLINK...</div>
-    </div>
+    <main class="terminal">
+        <header class="terminal-header">
+            <div class="status-dot"></div>
+            <span class="system-title">SYSTEM: NEURAL_LOTTO_v3.0.4</span>
+            <span class="system-time" id="clock">00:00:00</span>
+        </header>
 
-    <div class="controls">
-      <button id="generate-btn" class="sf-button">INITIATE SEQUENCE</button>
-    </div>
-  </div>
-  <script defer type="text/javascript" src="/main.js"></script>
+        <section class="display-panel">
+            <div id="output-stream" class="output-stream">
+                <div class="system-msg">> SYSTEM INITIALIZED...</div>
+                <div class="system-msg">> WAITING FOR SEED INPUT...</div>
+            </div>
+            
+            <div id="result-grid" class="result-grid">
+                <!-- 5 rows of numbers will be injected here -->
+            </div>
+        </section>
+
+        <footer class="terminal-footer">
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+            <button id="trigger-btn" class="glitch-btn">INITIATE_PREDICTION</button>
+        </footer>
+    </main>
+
+    <script src="main.js"></script>
 </body>
 </html>
